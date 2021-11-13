@@ -19,6 +19,7 @@ export const repeat = (fn, n, ...params) => {
     for (let i=0; i<n; i++){
         ans.push(fn(...params))
     }
+    return ans
 };
 
 
@@ -55,7 +56,7 @@ export const multiplyBy = (num1) => {
  *   "tenTimes" that multiplies a number by 10.
  */
 export const tenTimes = (num1) => {
-    multiplyBy(num1)(10)
+    return multiplyBy(num1)(10)
 };
 
 
@@ -158,8 +159,8 @@ export const someEven = (arr, test) => {
  *       -->  { pass: [1, 5, 31], fail: [90] }
  */
 export const filter = (arr, test) => {
-    passed = []
-    failed = []
+    let passed = []
+    let failed = []
     for (let i=0; i<arr.length; i++){
         if (test(arr[i])){
             passed.push(arr[i])
