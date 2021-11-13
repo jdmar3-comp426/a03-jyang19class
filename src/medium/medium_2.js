@@ -118,14 +118,14 @@ export const moreStats = {
             ans[years[i]] = {
                 hybrid: {
                     city: hybrid.reduce((a, b) => a + b['city_mpg'], 0)/hybrid.length,
-                    highway: hybrid.reduce((a, b) => a + b['city_mpg'], 0)/hybrid.length
+                    highway: hybrid.reduce((a, b) => a + b['highway_mpg'], 0)/hybrid.length
                 },
                 notHybrid: {
                     city: notHybrid.reduce((a, b) => a + b['city_mpg'], 0)/hybrid.length,
-                    highway: notHybrid.reduce((a, b) => a + b['city_mpg'], 0)/hybrid.length
+                    highway: notHybrid.reduce((a, b) => a + b['highway_mpg'], 0)/hybrid.length
                 }
             }
         }
-        return 2
+        return ans
     }
 };
