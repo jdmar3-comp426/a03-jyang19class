@@ -42,7 +42,7 @@ export function getIncreasingArray(startNumber, endNumber) {
 export function maxAndMin(numbers) {
     var maxNum = Math.max(...numbers)
     var minNum = Math.min(...numbers)
-    return {min: minNum, max: maxNum}
+    return {max: maxNum,min: minNum}
 }
 
 /**
