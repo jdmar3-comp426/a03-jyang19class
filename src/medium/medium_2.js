@@ -110,22 +110,6 @@ export const moreStats = {
     },
     avgMpgByYearAndHybrid: function(){
         var ans = new Object()
-        let years = [...new Set(mpg_data.filter(a => a.year))]
-        for (let i = 0; i < years.length; i++){
-            let yearCars = mpg_data.filter(a => a.year == years[i])
-            let hybrid = yearCars.filter(a => a.hybrid == true)
-            let notHybrid = yearCars.filter(a => a.hybrid == false)
-            ans[years[i]] = {
-                hybrid: {
-                    city: hybrid.reduce((a, b) => a + b['city_mpg'], 0)/hybrid.length,
-                    highway: hybrid.reduce((a, b) => a + b['highway_mpg'], 0)/hybrid.length
-                },
-                notHybrid: {
-                    city: notHybrid.reduce((a, b) => a + b['city_mpg'], 0)/hybrid.length,
-                    highway: notHybrid.reduce((a, b) => a + b['highway_mpg'], 0)/hybrid.length
-                }
-            }
-        }
         return ans
     }
 };
