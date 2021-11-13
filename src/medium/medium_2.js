@@ -110,6 +110,6 @@ export const moreStats = {
     },
     avgMpgByYearAndHybrid: function(){
         var ans = new Object()
-        return ans
+        return 2
     }
 };
