@@ -16,8 +16,9 @@
  */
 export const repeat = (fn, n, ...params) => {
     let ans = []
+    var func = new Function(fn)
     for (let i=0; i<n; i++){
-        ans.push(fn(...params))
+        ans.push(func(...params))
     }
     return ans
 };
