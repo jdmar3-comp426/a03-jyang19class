@@ -87,28 +87,12 @@ export const allCarStats = {
  * }
  */
 
- var ans2 = new Object()
- let years = [...new Set(mpg_data.filter(a => a.year))]
- for (let i = 0; i < years.length; i++){
-     let yearCars = mpg_data.filter(a => a.year == years[i])
-     let hybrid = yearCars.filter(a => a.hybrid == true)
-     let notHybrid = yearCars.filter(a => a.hybrid == false)
-     ans2[years[i]] = {
-         hybrid: {
-             city: hybrid.reduce((a, b) => a + b['city_mpg'], 0)/hybrid.length,
-             highway: hybrid.reduce((a, b) => a + b['highway_mpg'], 0)/hybrid.length
-         },
-         notHybrid: {
-             city: notHybrid.reduce((a, b) => a + b['city_mpg'], 0)/hybrid.length,
-             highway: notHybrid.reduce((a, b) => a + b['highway_mpg'], 0)/hybrid.length
-         }
-     }
- }
+
 
 export const moreStats = {
     makerHybrids: function(){
         let ans = []
-        let keys = [...new Set(mpg_data.filter(a => a.make))]
+        let keys = [...new Set(mpg_data.map(a => a.make))]
         for (let i=0; i<keys.length; i++){
             let hybridsFound = mpg_data.reduce(function (acc, obj) {
                 let key = keys[i]
@@ -124,5 +108,24 @@ export const moreStats = {
         ans.sort((a,b) => b.hybrids.length - a.hybrids.length)
         return ans
     },
-    avgMpgByYearAndHybrid: ans2
+    avgMpgByYearAndHybrid: function(){
+        var ans2 = {}
+        let years = [...new Set(mpg_data.map(a => a.year))]
+        for (let i = 0; i < years.length; i++){
+            let yearCars = mpg_data.filter(a => a.year == years[i])
+            let hybrid = yearCars.filter(a => a.hybrid == true)
+            let notHybrid = yearCars.filter(a => a.hybrid == false)
+            ans2[years[i]] = {
+                hybrid: {
+                    city: hybrid.reduce((a, b) => a + b['city_mpg'], 0)/hybrid.length,
+                    highway: hybrid.reduce((a, b) => a + b['highway_mpg'], 0)/hybrid.length
+                },
+                notHybrid: {
+                    city: notHybrid.reduce((a, b) => a + b['city_mpg'], 0)/notHybrid.length,
+                    highway: notHybrid.reduce((a, b) => a + b['highway_mpg'], 0)/notHybrid.length
+                }
+            }
+        }
+        return ans2
+    }
 };
