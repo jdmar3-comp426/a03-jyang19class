@@ -86,6 +86,22 @@ export const allCarStats = {
  *
  * }
  */
+ let ans = []
+ let keys = [...new Set(mpg_data.map(a => a.make))]
+ for (let i=0; i<keys.length; i++){
+     let hybridsFound = mpg_data.reduce(function (acc, obj) {
+         let key = keys[i]
+         if (obj.make == key) {
+           acc.push(obj.id)
+         }
+         return acc
+       }, [])
+     if (hybridsFound.length > 0){
+         ans.push({make:keys[i], hybrids:hybridsFound})
+     }
+ }
+ ans.sort((a,b) => b.hybrids.length - a.hybrids.length)
+ 
  var ans2 = {}
  let years = [...new Set(mpg_data.map(a => a.year))]
  for (let i = 0; i < years.length; i++){
@@ -106,23 +122,6 @@ export const allCarStats = {
 
 
 export const moreStats = {
-    makerHybrids: function(){
-        let ans = []
-        let keys = [...new Set(mpg_data.map(a => a.make))]
-        for (let i=0; i<keys.length; i++){
-            let hybridsFound = mpg_data.reduce(function (acc, obj) {
-                let key = keys[i]
-                if (obj.make == key) {
-                  acc.push(obj.id)
-                }
-                return acc
-              }, [])
-            if (hybridsFound.length > 0){
-                ans.push({make:keys[i], hybrids:hybridsFound})
-            }
-        }
-        ans.sort((a,b) => b.hybrids.length - a.hybrids.length)
-        return ans
-    },
+    makerHybrids: ans,
     avgMpgByYearAndHybrid: ans2
 };
